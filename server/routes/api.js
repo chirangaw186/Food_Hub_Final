@@ -50,11 +50,18 @@ router.post('/nikan',function(req,res){
 
 
 router.get('/retrieve', (req, res) => {
-    Items.find({}, (err, items) => {
-        console.log(items);
-      if (err) return res.json({ success: false, error: err });
-      return res.json(items);
-    });
+
+
+    try {
+        Items.find({}, (err, items) => {
+            //console.log(items);
+          if (err) return res.status(500).json({ success: false, error: err });
+          return res.json(items);
+        });
+    } catch (error) {
+        return res.json(items);
+    }
+   
   });
 
   router.get('/retrieveallinvoices/:id', (req, res) => {
@@ -182,7 +189,7 @@ router.post('/imageup/:id',function(req,res){
       if (err) return res.json({ message:"food item does not exist!" });
       else upload(req,res,(err) => {
             if(err){
-                res.status(404).json({ message : "Could not upload the image"})
+                res.json({ message : "Could not upload the image"})
             }else{  
                 Items.findOneAndUpdate({itemid:itemid},{imagepath:req.file.filename},(err,items)=>{
                     if(err)res.json({message:"Image Upload failed!"})
@@ -215,7 +222,7 @@ router.post('/fooddet',function(req,res){
                 itemname:req.body.itemname,
                 qty:req.body.qty,
                 price:req.body.price,
-                imagepath:""   
+                imagepath:"alternate.jpg"   
             })
           //  console.log(req.file);
            

@@ -7,7 +7,9 @@ const cors=require('cors');
 
 const app= express();
 
-mongoose.connect('mongodb://localhost:27017/myproject');
+// mongoose.connect('mongodb://localhost:27017/myproject');
+
+mongoose.connect('mongodb://chirangaw186:twinturbov8@ds163354.mlab.com:63354/foodhubdb');
 mongoose.Promise = global.Promise;
 
 app.use(express.static('public'));

@@ -183,7 +183,7 @@ return (
             </div>
 
             <div className="imgPreview">
-                    <img src={require("./upload/"+item.imagepath)} alt="Please select an image to preview"/>     
+                   <img src={require("./upload/"+item.imagepath)} alt="Please select an image to preview"/> 
             </div>
             </div>
      </div>

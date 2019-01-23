@@ -9,6 +9,7 @@ class ViewInvoice extends Component {
 
     this.state = {
       invoiceID: this.props.match.params.id,
+      shopID:this.props.match.params.shopid,
       item: [],
       currentDelivererName:""
     }
@@ -60,7 +61,7 @@ class ViewInvoice extends Component {
       .then((res) => {
         console.log(res);
         window.alert('Deliverer Assigned to invoice' + this.state.invoiceID + " !");
-        this.props.history.push("/ai/" + 2)
+        this.props.history.push("/ai/" + this.state.shopID)
       });
 
 
@@ -93,12 +94,12 @@ class ViewInvoice extends Component {
             <div className="card-body">
               {/* <h5 className="card-title">{item.name}</h5> */}
               <div>
-              <p className="card-text">Name :{item.name}</p>
+              <p className="card-text">Name :{item.driverName}</p>
                 <p className="card-text">Email :{item.email}</p>
                 <p className="card-text">Address :{item.address}</p>
                 <p className="card-text">Telephone :{item.mobile}</p>
               </div>
-              <a className="btn btn-info btn-lg" onClick={() => this.handleClick(item.driverID,item.name)}>Assign</a>
+              <a className="btn btn-info btn-lg" onClick={() => this.handleClick(item.driverID,item.driverName)}>Assign</a>
             </div>
           </div>
 

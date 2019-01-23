@@ -106,7 +106,7 @@ class AI extends Component {
 
     viewDeliverer(inID) {
 
-        this.props.history.push("/vi/" + inID)
+        this.props.history.push("/vi/" + inID + "/"+this.state.shopid)
     }
 
     Bstatus(st) {

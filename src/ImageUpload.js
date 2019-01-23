@@ -55,8 +55,8 @@ class ImageUpload extends Component {
       return response.json();
     })
     .then((res) => {
-      console.log(res.message);
-      // window.alert(res);  
+      console.log(res.message)
+        window.alert(res.message);
     });
     // console.log(this.state.selectedFile)
   }

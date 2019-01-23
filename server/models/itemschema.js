@@ -22,7 +22,8 @@ const Item = new schema({
        
     },
     imagepath:{
-        type: String       
+        type: String,
+            
     }
     
     

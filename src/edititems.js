@@ -180,9 +180,9 @@ handleSubmit(){
 
                 </div>
 
-                <div className="imgPreview">            
+                {/* <div className="imgPreview">            
 
-                   {/* <img src={require("D:\\SoftwareProject\\Interim_Food_Hub\\src\\upload\\"+this.state.imagepath)} alt="No image to preview"/>;     */}
+                <img src={require("./upload/"+this.state.i)} alt="Please select an image to preview"/> 
                 </div>
 
 
@@ -192,7 +192,7 @@ handleSubmit(){
                       <button type="button" className="btn btn-info btn-sm" style={{margin:"20px" }} >
                     Change Image
                  </button> 
-                </div>
+                </div> */}
 
 
             

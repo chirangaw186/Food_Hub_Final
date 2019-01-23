@@ -8,6 +8,10 @@ const drivers = new schema({
         type:String
       
     },
+    driverName:{
+        type:String
+      
+    },
     name:{
         type:String        
     },

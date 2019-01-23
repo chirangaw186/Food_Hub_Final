@@ -47,7 +47,7 @@ class App extends Component {
         <Route path="/realshow" component={RealShowItems}/>
         <Route path="/edit/:id" component={Edit}/>
         <Route path="/ai/:id" component={AI}/>
-        <Route path="/vi/:id" component={ViewInvoices}/>
+        <Route path="/vi/:id/:shopid/" component={ViewInvoices}/>
         
       </Switch>
     </Router>
