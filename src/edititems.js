@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import FileBase64 from 'react-file-base64';
 
 class Edit extends Component {
 
@@ -12,7 +12,9 @@ constructor(props){
         qty:null,
         price:null,
         imagepath:"",
-        i:""
+        i:"",
+        description:"",
+        files:null,
 
        
     }
@@ -21,6 +23,7 @@ constructor(props){
     this.onNameValueChange=this.onNameValueChange.bind(this);
     this.onQtyValueChange=this.onQtyValueChange.bind(this);
     this.onPriceValueChange=this.onPriceValueChange.bind(this);
+    this.onDescriptionValueChange=this.onDescriptionValueChange.bind(this);
     this.handleSubmit=this.handleSubmit.bind(this);
     this.handleImage=this.handleImage.bind(this);
 
@@ -57,6 +60,13 @@ this.setState({
 });
 }
 
+onDescriptionValueChange (event) {
+  event.preventDefault();
+  this.setState({
+      description: event.target.value
+  });
+  }
+
 
 
 componentDidMount(){
@@ -85,7 +95,7 @@ componentDidMount(){
               qty:res.qty,
               price:res.price,
               imagepath:res.imagepath,
-              i:res.imagepath
+              description:res.description
 
              
            });
@@ -97,20 +107,54 @@ componentDidMount(){
 
 }
 
+getFiles(files){
+  this.setState({ files: files })
+}
+
 
 handleSubmit(){
   
+        // fetch('http://localhost:4000/index/foodupdate/'+this.state.itemid,{
+        //   method:"POST",
+        //   headers: {
+        //     "Content-Type": "application/json"
+        //   },
+        //   body:JSON.stringify({
+        //     itemname:this.state.itemname,
+        //     itemid:this.state.itemid,
+        //     qty:this.state.qty,
+        //     price:this.state.price, 
+        //     description:this.state.description
+        //   })
+        // })
+        // .then(response => response.json())
+        // .then(()=>{
+        //   window.alert("Food Item Updated Successfully!")
+        // })
+
+        
+        var myimage="alternate.jpg";
+        if(this.state.files==null){
+           console.log("inside if")
+            
+        }else{
+           myimage=this.state.files.base64
+        }
+
+        const data = new FormData();
+        data.append('imagepath',myimage);
+        data.append('itemid',this.state.mitemid);
+        data.append('itemname',this.state.itemname);
+        data.append('qty',this.state.qty);
+        data.append('price',this.state.price);
+        data.append('description',this.state.description);
+    
+
+
         fetch('http://localhost:4000/index/foodupdate/'+this.state.itemid,{
           method:"POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body:JSON.stringify({
-            itemname:this.state.itemname,
-            itemid:this.state.itemid,
-            qty:this.state.qty,
-            price:this.state.price,
-          })
+          
+          body:data
         })
         .then(response => response.json())
         .then(()=>{
@@ -165,6 +209,24 @@ handleSubmit(){
           </div>
           </div>
 
+          <div className="form-group">
+          <label className="col-lg-3 control-label">Description:</label>
+          <div className="col-lg-8">
+          <input className="form-control" type="text" value={this.state.description} onChange={this.onDescriptionValueChange}/>
+          </div>
+        </div>
+
+        <div className="form-group">
+                        <label className="control-label col-sm-2" >Change Image:</label>
+                        <div className="col-sm-10">
+                            <FileBase64
+                                multiple={false}
+                                onDone={this.getFiles.bind(this)}
+                               />
+
+                        </div>
+                    </div>
+
 
          
               
@@ -180,19 +242,14 @@ handleSubmit(){
 
                 </div>
 
-                {/* <div className="imgPreview">            
+                <div className="imgPreview">            
 
-                <img src={require("./upload/"+this.state.i)} alt="Please select an image to preview"/> 
+                <img src={this.state.imagepath} alt="Please select an image to preview"/> 
                 </div>
 
 
 
-                 <div className="form-group">
-                      <label className=" control-label"></label>
-                      <button type="button" className="btn btn-info btn-sm" style={{margin:"20px" }} >
-                    Change Image
-                 </button> 
-                </div> */}
+               
 
 
             

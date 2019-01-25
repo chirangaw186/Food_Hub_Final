@@ -12,7 +12,8 @@ constructor(props){
     this.state = {
      item: [],
      imagepreviewurl:"",
-     currentID:""
+     currentID:"",
+     shopid: this.props.match.params.id
      
     };
 
@@ -24,7 +25,7 @@ constructor(props){
 
 componentDidMount(){
    
-    fetch('http://localhost:4000/index/retrieve')
+    fetch('http://localhost:4000/index/retrieve/'+this.state.shopid)
      .then(response => response.json())
 
     .then((res) => {
@@ -159,14 +160,15 @@ return (
       </div>
       </div>
 
-
       <div className="form-group">
-      <label className="col-lg-3 control-label">Item image:</label>
+      <label className="col-lg-3 control-label">Description:</label>
       <div className="col-lg-8">
-      <input type="file" className="form-control"/>
+      <input className="form-control" type="text" value={item.description}/>
       </div>
-    </div>
-          
+    </div>  
+
+
+     
 
       <div className="form-group">
       <label className="col-md-3 control-label"></label>
@@ -183,7 +185,7 @@ return (
             </div>
 
             <div className="imgPreview">
-                   <img src={require("./upload/"+item.imagepath)} alt="Please select an image to preview"/> 
+                   <img src={item.imagepath} alt="Please select an image to preview"/> 
             </div>
             </div>
      </div>

@@ -19,10 +19,12 @@ import ImageUpload from './ImageUpload';
 import Edit from './edititems';
 import AI from './allinvoices';
 import ViewInvoices from './ViewInvoice';
+import AddNewItem from './AddNewItem';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ShowItems from './ShowItems';
 import UpdateItem from './UpdateItem';
+
 
 
 
@@ -44,10 +46,11 @@ class App extends Component {
         <Route path="/rupdate" component={RealUpdate}/>
         <Route path="/supdate" component={ShopUpdate}/>
         
-        <Route path="/realshow" component={RealShowItems}/>
+        <Route path="/realshow/:id" component={RealShowItems}/>
         <Route path="/edit/:id" component={Edit}/>
         <Route path="/ai/:id" component={AI}/>
         <Route path="/vi/:id/:shopid/" component={ViewInvoices}/>
+        <Route path="/addnew/:id" component={AddNewItem}/>
         
       </Switch>
     </Router>
